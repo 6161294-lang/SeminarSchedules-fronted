@@ -1,0 +1,625 @@
+:root {
+  --color-bg: #f1f4f2;
+  --color-surface: #ffffff;
+  --color-text: #1f2a25;
+  --color-muted: #6b7771;
+  --color-primary: #2f8f5b;
+  --color-primary-dark: #24724a;
+  --color-primary-soft: #e3f2e9;
+  --color-accent: #f0a43a;
+  --color-accent-soft: #fdf0d9;
+  --color-gray-soft: #e8ece9;
+  --color-sidebar: #26332c;
+  --color-danger: #c92a2a;
+  --color-border: #d9dfdb;
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, 'Segoe UI', Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.6rem;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+.muted {
+  color: var(--color-muted);
+  margin-top: 0;
+}
+
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px rgb(31 42 37 / 0.08);
+  padding: 1.5rem;
+}
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 24rem;
+}
+
+.auth-switch {
+  margin: 1rem 0 0;
+  text-align: center;
+}
+
+/* טפסים */
+.field {
+  margin-bottom: 1rem;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font: inherit;
+}
+
+.field input[aria-invalid='true'] {
+  border-color: var(--color-danger);
+}
+
+.field__error {
+  margin: 0.25rem 0 0;
+  color: var(--color-danger);
+  font-size: 0.875rem;
+}
+
+/* כפתורים */
+.btn {
+  padding: 0.6rem 1.2rem;
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.btn--secondary {
+  background: var(--color-gray-soft);
+  color: var(--color-text);
+}
+
+.btn--danger {
+  background: var(--color-danger);
+  color: #fff;
+}
+
+/* הודעות */
+.alert {
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.alert--error {
+  background: #ffe3e3;
+  color: #8a1c1c;
+}
+
+.alert--info {
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+}
+
+.alert--success {
+  background: var(--color-primary-soft);
+  color: #1b5e20;
+}
+
+/* טעינה */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 2rem;
+}
+
+.loading__spinner {
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* מסגרת האפליקציה: סרגל צד כהה + אזור תוכן (בסגנון Any.do) */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.layout__sidebar {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  flex: 0 0 15.5rem;
+  height: 100vh;
+  padding: 1.25rem 0.9rem;
+  background: var(--color-sidebar);
+  color: #e6ede9;
+  overflow-y: auto;
+}
+
+.layout__brand {
+  padding: 0 0.6rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.layout__brand::before {
+  content: '';
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-inline-end: 0.55rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.layout__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+.nav-link {
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #c3cfc8;
+  border-inline-start: 3px solid transparent;
+}
+
+.nav-link:hover {
+  background: rgb(255 255 255 / 0.08);
+  color: #fff;
+}
+
+.nav-link--active {
+  background: rgb(47 143 91 / 0.28);
+  border-inline-start-color: var(--color-accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.layout__user {
+  display: grid;
+  gap: 0.6rem;
+  padding: 0.8rem;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 0.07);
+}
+
+.layout__username {
+  font-size: 0.9rem;
+  color: #e6ede9;
+}
+
+.layout__user .btn--secondary {
+  background: rgb(255 255 255 / 0.14);
+  color: #fff;
+}
+
+.layout__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.layout__topbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.8rem 1.75rem;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.layout__main {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 1.75rem 1.75rem 3rem;
+}
+
+@media (max-width: 48rem) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .layout__sidebar {
+    position: static;
+    flex: none;
+    width: 100%;
+    height: auto;
+  }
+
+  .layout__nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* פעמון התראות */
+.bell {
+  position: relative;
+  text-decoration: none;
+  font-size: 1.3rem;
+}
+
+.bell__badge {
+  position: absolute;
+  top: -0.45rem;
+  inset-inline-end: -0.6rem;
+  min-width: 1.2rem;
+  padding: 0 0.3rem;
+  border-radius: 999px;
+  background: var(--color-danger);
+  color: #fff;
+  font-size: 0.75rem;
+  line-height: 1.2rem;
+  text-align: center;
+}
+
+/* כותרת עמוד וסרגלי כלים */
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state {
+  padding: 2rem;
+  text-align: center;
+  color: var(--color-muted);
+}
+
+/* התראות */
+.notification-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  border-inline-start: 4px solid transparent;
+}
+
+.notification--unread {
+  border-inline-start-color: var(--color-primary);
+  background: var(--color-primary-soft);
+}
+
+.notification__body p {
+  margin: 0.25rem 0;
+}
+
+/* הודעות קופצות */
+.toasts {
+  position: fixed;
+  bottom: 1rem;
+  inset-inline-start: 1rem;
+  display: grid;
+  gap: 0.5rem;
+  z-index: 1000;
+}
+
+.toast {
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  color: #fff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.25);
+}
+
+.toast--success {
+  background: #2b8a3e;
+}
+
+.toast--error {
+  background: var(--color-danger);
+}
+
+.toast--info {
+  background: var(--color-primary);
+}
+
+/* רשימות וכרטיסים */
+.card-list,
+.lesson-list {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.card + .card,
+form.card {
+  margin-top: 1rem;
+}
+
+.card h2,
+.card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.1rem;
+}
+
+.card__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.confirm {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+  font-size: 0.8rem;
+  margin-inline-start: 0.5rem;
+}
+
+.badge--success {
+  background: var(--color-primary-soft);
+  color: #1b5e20;
+}
+
+.badge--warning {
+  background: var(--color-accent-soft);
+  color: #7a5b00;
+}
+
+/* מערכת שעות */
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+
+.week-day h2 {
+  font-size: 1.05rem;
+}
+
+.week-day ul {
+  margin: 0;
+  padding-inline-start: 1.1rem;
+}
+
+.week-day--today {
+  outline: 2px solid var(--color-primary);
+}
+
+.lesson-card {
+  display: flex;
+  gap: 1rem;
+}
+
+.lesson-card__time {
+  font-weight: 700;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+.lesson-card__body p {
+  margin: 0.15rem 0;
+}
+
+.lesson-card__note {
+  color: #7a5b00;
+}
+
+/* הגשות, קבצים ומשוב */
+.file-list {
+  list-style: none;
+  margin: 0.5rem 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.file-list li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.feedback {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-inline-start: 4px solid #2b8a3e;
+  background: #f1fbf3;
+  border-radius: 8px;
+}
+
+.feedback p {
+  margin: 0.25rem 0;
+}
+
+.note__content {
+  white-space: pre-wrap;
+}
+
+/* סינון הגשות */
+.filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 0 1rem;
+  margin-bottom: 1rem;
+}
+
+/* שיחה מורה-מזכירה */
+.thread {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.message {
+  max-width: 85%;
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  justify-self: start;
+}
+
+.message--mine {
+  background: var(--color-primary-soft);
+  justify-self: end;
+}
+
+.message p {
+  margin: 0.2rem 0;
+  white-space: pre-wrap;
+}
+
+/* מסכי המזכירה */
+.field--checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.field--checkbox label {
+  margin: 0;
+}
+
+.field--checkbox input {
+  width: auto;
+}
+
+.card--inactive {
+  opacity: 0.7;
+}
+
+.lesson-admin--cancelled {
+  border-inline-start: 4px solid #e67700;
+}
+
+.two-columns {
+  display: grid;
+  grid-template-columns: minmax(14rem, 1fr) 2fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 48rem) {
+  .two-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.thread-item {
+  width: 100%;
+  display: grid;
+  gap: 0.2rem;
+  text-align: start;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font: inherit;
+  cursor: pointer;
+}
+
+.thread-item--active {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+}

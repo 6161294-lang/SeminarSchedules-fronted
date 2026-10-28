@@ -1,0 +1,21 @@
+# הגדרות פריסה ל-Render (Blueprint) של אתר ה-React, כאתר סטטי
+# https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: seminar-schedule-frontend
+    runtime: static
+    # --include=dev: כדי ש-TypeScript ו-Vite יותקנו לצורך הבנייה
+    buildCommand: npm ci --include=dev && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # כתובת ה-Backend. נקבעת בזמן הבנייה (לא בזמן ריצה), ולכן אחרי שינוי צריך לבצע Deploy מחדש.
+      # בלי "/" בסוף. הערך מוזן בלוח הבקרה של Render ולא נכתב כאן
+      - key: VITE_API_URL
+        sync: false
+    routes:
+      # אפליקציה עם ראוטר: כל כתובת (למשל /student/homework) מגישה את index.html
+      - type: rewrite
+        source: /*
+        destination: /index.html
