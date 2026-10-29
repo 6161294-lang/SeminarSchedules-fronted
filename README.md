@@ -40,7 +40,7 @@ npm run dev
 | `npm run build` | בדיקת טיפוסים ובנייה לתיקיית `dist` |
 | `npm run preview` | הפעלת הגרסה הבנויה (כמו בייצור) |
 | `npm run typecheck` | בדיקת טיפוסים |
-| `npm run lint` | בדיקת קוד (ESLint) |
+| `npm run lint` | בדיקת קוד (Oxlint) |
 | `npm test` | בדיקות יחידה ורכיבים (198) |
 | `npm run test:e2e -- <כתובת>` | בדיקות מקצה לקצה מול Backend אמיתי (ראי למטה) |
 
