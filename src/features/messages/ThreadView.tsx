@@ -21,7 +21,7 @@ export function ThreadView({ teacherId, onLoaded }: ThreadViewProps) {
   useEffect(() => {
     if (isSuccess) onLoaded?.();
     // onLoaded נשלחת מהורה בכל רינדור, ולכן תלויים רק בזמן העדכון של הנתונים
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks-js/exhaustive-deps
   }, [dataUpdatedAt, isSuccess]);
 
   return (
