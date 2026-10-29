@@ -30,7 +30,8 @@ describe('AppLayout', () => {
   it('מציג את שם המשתמשת ואת התפקיד', () => {
     mockApi();
     renderWithProviders(<App />, { route: '/', preloadedState: authenticated('ADMIN') });
-    expect(screen.getByText('שרה המזכירה (מזכירה)')).toBeInTheDocument();
+    expect(screen.getByText('שרה המזכירה')).toBeInTheDocument();
+    expect(screen.getByText('מזכירה')).toBeInTheDocument();
   });
 
   it('הפעמון מציג את מספר ההתראות שלא נקראו', async () => {

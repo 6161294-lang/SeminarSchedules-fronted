@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useNotifications } from '@/api/hooks/messaging';
+import { Icon } from '@/components/ui/Icon';
 import { paths } from '@/routes/paths';
 
 /** פעמון בכותרת עם מספר ההתראות שלא נקראו. מתרענן לבד כל 30 שניות */
@@ -13,7 +14,7 @@ export function NotificationBell() {
       className="bell"
       aria-label={unread > 0 ? `התראות, ${unread} חדשות` : 'התראות'}
     >
-      <span aria-hidden="true">🔔</span>
+      <Icon name="bell" size={20} />
       {unread > 0 && (
         <span className="bell__badge" data-testid="unread-badge">
           {unread > 99 ? '99+' : unread}

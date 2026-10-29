@@ -102,7 +102,7 @@ describe('בדיקת מפתח שמור בעלייה', () => {
     renderWithProviders(<App />, { route: '/', preloadedState: checking('STUDENT') });
 
     expect(screen.getByText('בודקת התחברות...')).toBeInTheDocument();
-    expect(await screen.findByText('שם מהשרת (תלמידה)')).toBeInTheDocument();
+    expect(await screen.findByText('שם מהשרת')).toBeInTheDocument();
   });
 
   it('מפתח שנדחה (401) מנתק ומעביר להתחברות', async () => {

@@ -47,6 +47,41 @@ describe('מערכת שבועית', () => {
     expect(screen.getAllByText('היום')).toHaveLength(1);
   });
 
+  it('שיעור שבוטל לא מוצג בטבלה אלא ברשימת השינויים, ושיעור ששונה מופיע בשניהם', async () => {
+    mockApi({
+      'GET /api/lessons/week': week({
+        1: [
+          makeLesson({ id: 'l1', dayOfWeek: 1, status: 'CANCELLED' }),
+          makeLesson({
+            id: 'l2',
+            dayOfWeek: 1,
+            subject: { id: 's2', name: 'פיתוח Web' },
+            startTime: '12:00',
+            endTime: '13:30',
+            changeNote: 'עבר לחדר 214'
+          })
+        ]
+      })
+    });
+    openStudent('/student');
+
+    const changes = await screen.findByRole('region', { name: 'שינויים במערכת' });
+    expect(within(changes).getByText('מבני נתונים')).toBeInTheDocument();
+    expect(within(changes).getByText('בוטל')).toBeInTheDocument();
+    expect(within(changes).getByText('עבר לחדר 214')).toBeInTheDocument();
+
+    const monday = screen.getByRole('region', { name: 'יום שני' });
+    expect(within(monday).queryByText('מבני נתונים')).not.toBeInTheDocument();
+    expect(within(monday).getByText('פיתוח Web')).toBeInTheDocument();
+    expect(screen.getByRole('region', { name: 'שיעורים השבוע' })).toHaveTextContent('1 שיעורים');
+  });
+
+  it('שבוע בלי שינויים מציג הודעה מתאימה', async () => {
+    mockApi({ 'GET /api/lessons/week': week({ 0: [makeLesson()] }) });
+    openStudent('/student');
+    expect(await screen.findByText('אין שינויים השבוע')).toBeInTheDocument();
+  });
+
   it('לחיצה על יום פותחת את המערכת היומית עם שם שיעור, שעות וחדר', async () => {
     const fetchMock = mockApi({
       'GET /api/lessons/week': week({ 0: [makeLesson()] }),
